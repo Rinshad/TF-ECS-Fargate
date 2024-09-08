@@ -1,5 +1,5 @@
 resource "aws_secretsmanager_secret" "rds_password" {
-  name        = "${var.app_prefix}-rds-mysql-password"
+  name        = "${var.app_prefix}-rdsmysql-password"
   description = "MySQL admin password"
 }
 
