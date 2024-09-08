@@ -1,15 +1,16 @@
 # TF-ECS-Fargate
-Terraform code to provision complete infrastructure to host the Notejam application.
+Terraform code is used to provide complete infrastructure to host the "Notejam" application.
 
 # Architecture diagram
 
+![Notejam_app](https://github.com/user-attachments/assets/f9c4dfb0-45d3-4d0b-8e24-c00efd8692be)
 
 
 # AWS Resource.
-Terraform (Iac approach) used to provision the AWS ECS cluster. The code provision following resources. The same code can be used to provision resource for similar application hosting by changing the variables in the terraform *.tfvars file.
+Terraform (Iac approach) was used to provision the AWS ECS cluster. The code provisioned the following resources. The same code can be used to provision resources for similar application hosting by changing the variables in the terraform *.tfvars file.
 
 1. VPC, private and public subnet. 
-2. Route tables, Internet getway, Security group and NAT gateway.
+2. Route tables, Internet gateways, Security group and NAT gateway.
 3. ECS Fargate cluster with service and task definition.
 4. Application Loadblancer, to access the ECS cluster application.
 5. RDS database, with access limited from the private subnet.
@@ -17,18 +18,18 @@ Terraform (Iac approach) used to provision the AWS ECS cluster. The code provisi
 7. AWS IAM roles for ECS task execution and RDS access.
 
 # Infrastructure security.
-The application hosted on ECS Fargate can be accessed only using Application Gateway DNS name. The Security group attached is restricted incoming connection only to the port 80 (with TLS/SSL certificate can be used to make more secure). The ECS Fargate and RDS is provisioned under the private subnet and can't be accessed directly from the internet.
+The application hosted on ECS Fargate can be accessed only using the Application Gateway DNS name. The Security group attached restricts incoming connection only to port 80 (with TLS/SSL certificate can be used to make it more secure). The ECS Fargate and RDS are provisioned under the private subnet and can't be accessed directly from the internet.
 
-The ECS cluster and RDS cluster is highly available, currently provisioned in the eu-central-1a and eu-central-1b avaialability zone. The availability zone can be increased by modifying the az_count variable.
+The ECS cluster and RDS cluster is highly available, currently provisioned in the eu-central-1a and eu-central-1b availability zone. The availability zone can be increased by modifying the az_count variable.
 
 # Application deployment.
 
-The Notejam (Express js frame work)  application is containarised. The build and deployment is handled with Github Actions Workflow. The application image will be pushed to AWS ECR and pulled by ECS cluster to host the application. THe build pipeline create ECS task definition and push to the ECS Fargate cluster.
+The Notejam (Express js framework)  application is containerized. The build and deployment are handled with GitHub Actions Workflow. The application image will be pushed to AWS ECR and pulled by the ECS cluster to host the application. The build pipeline creates the ECS task definition and pushes it to the ECS Fargate cluster.
 
-Any changes to the application can be done with Gitops method. (Git considered as the source of truth).
+Any changes to the application can be made using the Gitops method. (Git is considered the source of truth.)
 
 # Github action workflow code
-
+```
 ---
 name: Build and Push Docker Image to AWS ECR
 on:
@@ -67,6 +68,8 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+```
+
 
 
 
