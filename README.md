@@ -26,7 +26,7 @@ The ECS cluster and RDS cluster is highly available, currently provisioned in th
 
 The Notejam (Express js framework)  application is containerized. The build and deployment are handled with GitHub Actions Workflow. The application image will be pushed to AWS ECR and pulled by the ECS cluster to host the application. The build pipeline creates the ECS task definition and pushes it to the ECS Fargate cluster.
 
-Any changes to the application can be made using the Gitops method. (Git is considered the source of truth.)
+Any changes to the application can be made using the Gitops method. (Git is considered the source of truth.) To make changes to the application clone the repository and make changes to a new branch. Pushing to master will automatically trigger the application build and deployment Github Actions.
 
 # Github action workflow code
 ```
