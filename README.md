@@ -1,5 +1,5 @@
-# TF-ECS-Fargate
-The Terraform code in this repository is to provision the complete infrastructure required to host the 'Notejam' application on AWS ECS Fargate with RDS MySQL as database. The code will provision a highly available and secure infrastructure.
+# Notejam infrastructure
+The Terraform code in this repository is to provision the complete infrastructure required to host the 'Notejam' application on AWS ECS Fargate with RDS MySQL as the database. The code will provision a highly available and secure infrastructure.
 
 ## Architecture diagram
 
@@ -20,7 +20,7 @@ Terraform (Iac approach) was used to provision the AWS ECS cluster. The code pro
 ## Infrastructure security.
 The application hosted on ECS Fargate can be accessed only using the Application Gateway DNS name. The Security group attached restricts incoming connection only to port 80 (with TLS/SSL certificate can be used to make it more secure). The ECS Fargate and RDS are provisioned under the private subnet and can't be accessed directly from the internet.
 
-The ECS cluster and RDS cluster is highly available, currently provisioned in the eu-central-1a and eu-central-1b availability zone. The availability zone can be increased by modifying the az_count variable.
+The ECS and RDS clusters are highly available, currently provisioned in the eu-central-1a and eu-central-1b availability zones. The availability zone can be increased by modifying the az_count variable.
 
 ## Application deployment.
 
